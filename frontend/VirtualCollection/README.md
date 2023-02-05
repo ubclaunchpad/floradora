@@ -6,6 +6,8 @@ Make sure you run `npm install` at the very beginning before you start your deve
 
 Run any of the following commands: `npm run ios`, `npm run android`, `npm run web` to install the dependencies needed to deploy the app on their respective simulators.
 
+Follow the instructions [here](https://docs.expo.dev/workflow/android-studio-emulator/) to set up an Android simulator or the instructions [here](https://docs.expo.dev/workflow/ios-simulator/) to set up an iOS simulator.
+
 ### CI Tools
 
 -   Prettier
