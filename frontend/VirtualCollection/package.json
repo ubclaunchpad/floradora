@@ -1,45 +1,48 @@
 {
-    "name": "virtualcollection",
-    "version": "1.0.0",
-    "main": "node_modules/expo/AppEntry.js",
-    "scripts": {
-        "start": "expo start",
-        "android": "expo start --android",
-        "ios": "expo start --ios",
-        "web": "expo start --web",
-        "lint": "eslint --ignore-path .eslintignore --ext .js,.ts,.tsx . && prettier --ignore-path .gitignore --check \"**/*.+(js|ts|json|tsx)\"",
-        "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json|tsx)\"",
-        "ci": "npm run format && npm run lint",
-        "test": "jest -u"
-    },
-    "dependencies": {
-        "expo": "~47.0.12",
-        "expo-status-bar": "~1.4.2",
-        "react": "18.1.0",
-        "react-native": "0.70.5"
-    },
-    "devDependencies": {
-        "@babel/core": "^7.12.9",
-        "@tsconfig/react-native": "^2.0.3",
-        "@types/jest": "^29.4.0",
-        "@types/node": "^18.11.19",
-        "@types/react": "^18.0.27",
-        "@types/react-native": "^0.71.2",
-        "@types/react-test-renderer": "^18.0.0",
-        "@typescript-eslint/eslint-plugin": "^5.50.0",
-        "@typescript-eslint/parser": "^5.50.0",
-        "eslint": "^8.33.0",
-        "eslint-config-prettier": "^8.6.0",
-        "jest": "^27.5.1",
-        "jest-expo": "^47.0.1",
-        "prettier": "^2.8.3",
-        "typescript": "^4.9.5"
-    },
-    "jest": {
-        "preset": "jest-expo",
-        "transformIgnorePatterns": [
-            "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
-        ]
-    },
-    "private": true
+  "name": "virtualcollection",
+  "version": "1.0.0",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "lint": "eslint --ignore-path .eslintignore --ext .js,.ts,.tsx . && prettier --ignore-path .gitignore --check \"**/*.+(js|ts|json|tsx)\"",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json|tsx)\"",
+    "ci": "npm run format && npm run lint",
+    "test": "jest -u"
+  },
+  "dependencies": {
+    "expo": "~47.0.12",
+    "expo-status-bar": "~1.4.2",
+    "react": "18.1.0",
+    "react-native": "0.70.5",
+    "react-native-web": "~0.18.9",
+    "react-dom": "18.1.0",
+    "@expo/webpack-config": "^0.17.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@tsconfig/react-native": "^2.0.3",
+    "@types/jest": "^29.4.0",
+    "@types/node": "^18.11.19",
+    "@types/react": "^18.0.27",
+    "@types/react-native": "^0.71.2",
+    "@types/react-test-renderer": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.50.0",
+    "@typescript-eslint/parser": "^5.50.0",
+    "eslint": "^8.33.0",
+    "eslint-config-prettier": "^8.6.0",
+    "jest": "^27.5.1",
+    "jest-expo": "^47.0.1",
+    "prettier": "^2.8.3",
+    "typescript": "^4.9.5"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
+    ]
+  },
+  "private": true
 }
