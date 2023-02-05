@@ -1,0 +1,36 @@
+{
+    "name": "virtualcollection",
+    "version": "1.0.0",
+    "main": "node_modules/expo/AppEntry.js",
+    "scripts": {
+        "start": "expo start",
+        "android": "expo start --android",
+        "ios": "expo start --ios",
+        "web": "expo start --web",
+        "lint": "eslint --ignore-path .eslintignore --ext .js,.ts,.tsx . && prettier --check .",
+        "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json|tsx)\"",
+        "ci": "npm run format && npm run lint"
+    },
+    "dependencies": {
+        "expo": "~47.0.12",
+        "expo-status-bar": "~1.4.2",
+        "react": "18.1.0",
+        "react-native": "0.70.5"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.12.9",
+        "@tsconfig/react-native": "^2.0.3",
+        "@types/jest": "^29.4.0",
+        "@types/node": "^18.11.19",
+        "@types/react": "^18.0.27",
+        "@types/react-native": "^0.71.2",
+        "@types/react-test-renderer": "^18.0.0",
+        "@typescript-eslint/eslint-plugin": "^5.50.0",
+        "@typescript-eslint/parser": "^5.50.0",
+        "eslint": "^8.33.0",
+        "eslint-config-prettier": "^8.6.0",
+        "prettier": "^2.8.3",
+        "typescript": "^4.9.5"
+    },
+    "private": true
+}
