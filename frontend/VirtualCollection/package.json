@@ -7,9 +7,10 @@
         "android": "expo start --android",
         "ios": "expo start --ios",
         "web": "expo start --web",
-        "lint": "eslint --ignore-path .eslintignore --ext .js,.ts,.tsx . && prettier --check .",
+        "lint": "eslint --ignore-path .eslintignore --ext .js,.ts,.tsx . && prettier --ignore-path .gitignore --check \"**/*.+(js|ts|json|tsx)\"",
         "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json|tsx)\"",
-        "ci": "npm run format && npm run lint"
+        "ci": "npm run format && npm run lint",
+        "test": "jest -u"
     },
     "dependencies": {
         "expo": "~47.0.12",
@@ -29,8 +30,16 @@
         "@typescript-eslint/parser": "^5.50.0",
         "eslint": "^8.33.0",
         "eslint-config-prettier": "^8.6.0",
+        "jest": "^27.5.1",
+        "jest-expo": "^47.0.1",
         "prettier": "^2.8.3",
         "typescript": "^4.9.5"
+    },
+    "jest": {
+        "preset": "jest-expo",
+        "transformIgnorePatterns": [
+            "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
+        ]
     },
     "private": true
 }
