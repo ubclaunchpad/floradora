@@ -4,5 +4,6 @@
     "arrowParens": "always",
     "printWidth": 100,
     "tabWidth": 4,
-    "bracketSpacing": true
+    "bracketSpacing": true,
+    "organizeImportsSkipDestructiveCodeActions": true
 }
