@@ -1,6 +1,7 @@
 {
     "extends": "@tsconfig/react-native/tsconfig.json",
     "compilerOptions": {
+        "jsx": "react", // note from Marvel: my code won't work unless this is here for some reason
         "types": ["node", "jest"]
     }
 }
