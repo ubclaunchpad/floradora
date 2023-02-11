@@ -58,7 +58,7 @@ export default class CameraPage {
                 type = {this.state.type}
                 ref = {ref => {
                     this.camera = ref;
-                }}>
+                }}> 
 
                 </Camera>
 
