@@ -1,97 +1,44 @@
-import { Button, Text, TouchableOpacity, View, ViewBase } from 'react-native';
-import { AppStackProps } from './types';
-import React = require('react');
-import { Camera, Permissions } from 'expo'; // needs to be installed but ya boi is struggling
+import { Camera, CameraType } from 'expo-camera';
+import React, { useRef, useState } from 'react';
+import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-// may use this later
+export default function App() {
+    const [type, setType] = useState(CameraType.back);
+    const [permission, requestPermission] = Camera.useCameraPermissions();
+    const [uri, setUri] = useState('');
+    const camera = useRef<Camera>(null);
 
-interface Props{}
-
-export default class CameraPage {
-    camera?: Camera;
-
-    state = {
-        hasCameraPermission: null,
-        type: Camera.ConstantsType.back,
-        previewUri: undefined, 
-    };
-
-    async componentDidMount(){
-        const { status } = await Permissions.askAsync(Permissions.CAMERA);
-        this.setState({hasCameraPermission: status == 'granted' }); // setState is complaining bc expo has not been imported
+    if (!permission || !permission.granted) {
+        requestPermission();
     }
-    
-    snap = async() => {
-        if(this.camera){
-            let photo = await this.camera.takePictureAsync();
-            alert('PhotoTaken');
-            this.setState({previewUri: photo.uri});
-        }
-    };
-    
-    render({ navigation }: AppStackProps) {
-        const {hasCameraPermission} = this.state;
-        if (hasCameraPermission == null){
-            return < View />;
-        } else if (hasCameraPermission == false){
-            return( 
-            <View>
-                <Text> No camera access :// </Text>
-            </View>
-            ); 
-        }
 
-        // allows you to preciew the picture you just took
-        if (this.state.previewUri){
-            <View style={{ flex: 1}}>
-                <Image source={{uri: this.state.previewUri}} /> 
-            </View>
-        } //needs props??? stack overflow says needs changes to index.js or index.d.ts
+    function toggleCameraType() {
+        setType((current) => (current === CameraType.back ? CameraType.front : CameraType.back));
+    }
 
+    function snap() {
+        camera.current?.takePictureAsync().then((photo) => {
+            setUri(photo.uri);
+        });
+    }
+
+    if (uri.length == 0) {
         return (
-            <View>
-                <Text>Camera</Text>
-                <Button title="Home" onPress={() => navigation.goBack()} />
-                <Button title="Snap pic" onPress={() => {this.snap}} /> 
-            <Camera
-                style = {{ flex: 1 }}
-                type = {this.state.type}
-                ref = {ref => {
-                    this.camera = ref;
-                }}> 
-
+            <View style={{ display: 'flex' }}>
+                <Camera style={{ height: '100%' }} type={type} ref={camera}>
+                    <View>
+                        <TouchableOpacity onPress={toggleCameraType}>
+                            <Button title="Snap pic" onPress={snap} />
+                            <Text>Flip Camera </Text>
+                        </TouchableOpacity>
+                    </View>
                 </Camera>
-
-                <Camera style ={{ flex: 1}} type = {this.state.type}>
-                    <View
-                        style={{
-                            flex: 1,
-                            backgroundColor: 'transparent',
-                            flexDirection: 'row',
-                        }}>
-                        <TouchableOpacity
-                            style={{
-                                flex: 0.1,
-                                alignSelf: 'flex-end',
-                                alignItems: 'center',
-                            }}
-                            onPress={() => {
-                                this.setState((
-                                    type: this.setState({
-                                        type: this.state.type == Camera.Constants.Type.back
-                                        ? Camera.Constants.Type.front 
-                                        : Camera.Constants.Type.back,
-                                    });
-                            }}>
-                            <Text
-                                style={{ fontSize: 18, marginBottom: 10, color: 'white'}}>
-                                    {' '}Flip{' '}
-                                </Text>
-                            </TouchableOpacity>
-                        </View>
-                        
-                </Camera>
-
+            </View>
+        );
+    } else {
+        return (
+            <View style={{ display: 'flex' }}>
+                <Image style={{ width: '100%', height: '100%' }} source={{ uri: uri }} />
             </View>
         );
     }
