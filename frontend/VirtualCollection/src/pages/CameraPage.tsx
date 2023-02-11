@@ -46,7 +46,7 @@ export default class CameraPage {
             <View style={{ flex: 1}}>
                 <Image source={{uri: this.state.previewUri}} /> 
             </View>
-        } //needs props??? stack overflow says needs changes to index.js or index.d.ts idek where to find these files
+        } //needs props??? stack overflow says needs changes to index.js or index.d.ts
 
         return (
             <View>
