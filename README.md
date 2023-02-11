@@ -1,5 +1,9 @@
 # virtual-collection
 
+## :gear: Developer Setup Guide
+
+Virtual Collection consists of a React Native frontend and an Express/Node backend, with everything written in TypeScript. To set up the frontend development environment, see the [frontend developer setup guide](/frontend/VirtualCollection/README.md). The backend and its associated documentation are still a work in progress - stay tuned!
+
 ## :books: Contributing
 
 Any and all contributions are greatly appreciated! Please follow the steps below to ensure your contribution gets accepted:
