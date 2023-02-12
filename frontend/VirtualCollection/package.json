@@ -9,7 +9,7 @@
         "web": "expo start --web",
         "lint": "eslint --ignore-path .eslintignore --ext .js,.ts,.tsx . && prettier --ignore-path .gitignore --check \"**/*.+(js|ts|json|tsx)\"",
         "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json|tsx)\"",
-        "ci": "npm run format && npm run lint",
+        "ci": "npm run lint",
         "test": "jest -u"
     },
     "dependencies": {
