@@ -1,0 +1,9 @@
+{
+    "semi": true,
+    "singleQuote": true,
+    "arrowParens": "always",
+    "printWidth": 100,
+    "tabWidth": 4,
+    "bracketSpacing": true,
+    "organizeImportsSkipDestructiveCodeActions": true
+}
