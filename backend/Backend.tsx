@@ -1,14 +1,14 @@
-import express from "express";
-const app = express();
+import express, { Express, Request, Response } from 'express';
+import { Server } from 'http';
+const app: Express = express();
 const port = 8080;
 
 // define a route handler for the default home page
-app.get( "/isalive", ( req, res ) => {
-    res.send( "I'm alive!" );
-} );
+app.get('/isalive', (req: Request, res: Response) => {
+    res.send("I'm alive!");
+});
 
 // start the Express server
-app.listen( port, () => {
-    // tslint:disable-next-line:no-console
-    console.log( `server started at http://localhost:${ port }` );
-} );
+const server: Server = app.listen(port);
+
+export default server;

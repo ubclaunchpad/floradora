@@ -8,5 +8,7 @@
         "sourceMap": true,
         "outDir": "dist",
         "rootDir": ".",
-    },
+        "jsx": "react",
+        "types": ["node", "jest"]
+    }
 }
