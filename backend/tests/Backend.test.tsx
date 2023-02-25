@@ -15,4 +15,8 @@ describe('Test the isalive path', () => {
                 done();
             });
     });
+    test('It should be a test', (done) => {
+        console.log('hi');
+        done();
+    });
 });
