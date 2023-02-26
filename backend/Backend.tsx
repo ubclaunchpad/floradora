@@ -12,23 +12,25 @@ app.get('/isalive', (req: Request, res: Response) => {
     res.send("I'm alive!");
 });
 
-db.one('SELECT EMAIL FROM USERS WHERE ID = 1', String)
-    .then((data) => {
-        if(data) {
-            console.log('DATA:', data);
-        }
-      })
-      .catch((error) => {
-        console.log('ERROR:', error)
-});
-
 
 // start the Express server
 const server: Server = app.listen(port);
 
 export default server;
 
-export class reqBody {
+db.multi(`
+  DROP TABLE IF EXISTS USERS;
+  CREATE TABLE USERS(ID INT PRIMARY KEY NOT NULL, FIRST_NAME TEXT NOT NULL, LAST_NAME TEXT NOT NULL, EMAIL TEXT);
+  INSERT INTO USERS (ID, FIRST_NAME, LAST_NAME, EMAIL) VALUES (1, 'john', 'smith', 'jsmith@otlk.com');
+  INSERT INTO USERS (ID, FIRST_NAME, LAST_NAME) VALUES (2, 'mike', 'smith');
+  SELECT EMAIL FROM USERS WHERE ID = 1;
+`).then((data) => {
+  console.log('DATA:', data[data.length - 1][0].email);
+}).catch((error) => {
+  console.log('ERROR:', error);
+});
+
+/*export class reqBody {
     // here for test, let input string length == 15
     user : string;
     opCode : string;
@@ -41,4 +43,4 @@ export class reqBody {
         this.user = inStr.slice(10, 15);
         this.data = new Int16Array(inStr.slice(15, 20).split('').map(c => c.charCodeAt(0)));
     }
-}
+}*/
