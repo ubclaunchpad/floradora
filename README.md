@@ -1,5 +1,19 @@
 # virtual-collection
 
+## Project Description
+
+### Directory Structure
+
+```
+├── frontend          : React Native frontend code
+├── backend           : all server and database code
+│   ├── controllers   : HTTP controllers to interact with the frontend
+│   ├── models        : data models for transferring data between the database/server/frontend
+│   ├── repositories  : database access services
+│   └── services      : general business logic services
+└── ml                : python ML model for classifying plant species
+```
+
 ## :gear: Developer Setup Guide
 
 Virtual Collection consists of a React Native frontend and an Express/Node backend, with everything written in TypeScript. To set up the frontend development environment, see the [frontend developer setup guide](/frontend/VirtualCollection/README.md). To set up the backend development environment, see the [backend developer setup guide](/backend/README.md).
