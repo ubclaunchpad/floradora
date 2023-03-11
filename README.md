@@ -1,6 +1,6 @@
 # :herb: Floradora
 
-## Project Description
+## :notebook_with_decorative_cover: Project Description
 
 A mobile application that helps identify plants when foraging and connects users to a foraging community.
 
