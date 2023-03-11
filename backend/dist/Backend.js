@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 const cors_1 = __importDefault(require("cors"));
-const pool = require("./db");
+const db_1 = __importDefault(require("./db"));
 //middleware
 app.use((0, cors_1.default)());
 app.use(express_1.default.json()); //req body
@@ -24,7 +24,7 @@ app.use(express_1.default.json()); //req body
 app.post("/users", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, display_name } = req.body;
-        const newUser = yield pool.query("INSERT INTO users (email, display_name) VALUES ($1, $2);", [email, display_name]);
+        const newUser = yield db_1.default.query("INSERT INTO users (email, display_name) VALUES ($1, $2);", [email, display_name]);
         res.json(newUser);
     }
     catch (error) {
@@ -34,44 +34,46 @@ app.post("/users", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 //get all users
 app.get("/users", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const allUsers = yield pool.query("SELECT * FROM users");
+        const allUsers = yield db_1.default.query("SELECT * FROM users");
         res.json(allUsers.rows);
     }
     catch (error) {
         console.error(error);
     }
 }));
-// //get a user
-// app.get("/users/:id", async(req: Request, res: Response) => {
-//     try {
-//         const {user_id} = req.params;
-//         const user = await pool.query("SELECT FROM users WHERE user_id = $1", [user_id]);
-//         res.json(user.rows[0]);
-//     } catch (error) {
-//         console.error(error);
-//     }
-// })
+//get a user
+app.get("/users/id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { user_id } = req.body;
+        const user = yield db_1.default.query("SELECT * FROM users WHERE user_id = $1", [user_id]);
+        res.json(user.rows[0]);
+    }
+    catch (error) {
+        console.error(error);
+    }
+}));
 // //update a user
-// app.put("/users/:id", async(req: Request, res: Response) => {
-//     try {
-//         const {user_id} = req.params;
-//         const {display_name} = req.body;
-//         const updateUser = await pool.query("UPDATE users SET display_name = $1 WHERE user_id = $2", [display_name, user_id]);
-//         res.json("User was updated.");
-//     } catch (error) {
-//         console.error(error);
-//     }
-// })
+app.put("/users/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { user_id, email, display_name } = req.body;
+        yield db_1.default.query("UPDATE users SET display_name = $1, email = $2 WHERE user_id = $3", [display_name, email, user_id]);
+        res.json("User " + user_id + "was updated.");
+    }
+    catch (error) {
+        console.error(error);
+    }
+}));
 // // delete a user
-// app.delete("/users/:id", async(req: Request, res: Response) => {
-//     try {
-//         const {user_id} = req.params;
-//         const deleteUser = await pool.query("DELETE FROM users WHERE user_id = $1", [user_id]);
-//         res.json("To do was deleted.");
-//     } catch (error) {
-//         console.error(error);
-//     }
-// })
+app.delete("/users", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { user_id } = req.body;
+        yield db_1.default.query("DELETE FROM users WHERE user_id = $1", [user_id]);
+        res.json("User" + user_id + "was deleted.");
+    }
+    catch (error) {
+        console.error(error);
+    }
+}));
 const server = app.listen(8080, () => {
     console.log("Server is listning on port 8080");
 });
