@@ -1,4 +1,10 @@
-const Pool = require("pg").Pool;
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const pg_1 = __importDefault(require("pg"));
+const Pool = pg_1.default.Pool;
 const pool = new Pool({
     user: "postgres",
     password: "7uNkXN4A8j8wTx35yW34",
@@ -6,5 +12,5 @@ const pool = new Pool({
     port: 5432,
     database: "postgres"
 });
-module.exports = pool;
+exports.default = pool;
 //# sourceMappingURL=db.js.map
