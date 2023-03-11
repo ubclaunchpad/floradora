@@ -1,6 +1,8 @@
-# Floradora
+# :herb: Floradora
 
 ## Project Description
+
+A mobile application that helps identify plants when foraging and connects users to a foraging community.
 
 ### Directory Structure
 
