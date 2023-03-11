@@ -1,17 +1,22 @@
-# virtual-collection
+# Floradora
 
 ## Project Description
 
 ### Directory Structure
 
 ```
-├── frontend          : React Native frontend code
-├── backend           : all server and database code
-│   ├── controllers   : HTTP controllers to interact with the frontend
-│   ├── models        : data models for transferring data between the database/server/frontend
-│   ├── repositories  : database access services
-│   └── services      : general business logic services
-└── ml                : python ML model for classifying plant species
+├── frontend/VirtualCollection  : React Native frontend code
+│   ├── assets                  : image assests used in the app
+│   └── src                     : frontend source code
+│       ├── components          : React Native components to be used in pages
+│       ├── pages               : main pages of the frontend application
+│       └── styles              : style definitions for pages and components
+├── backend                     : all server and database code
+│   ├── controllers             : HTTP controllers to interact with the frontend
+│   ├── models                  : data models for transferring data between the database/server/frontend
+│   ├── repositories            : database access services
+│   └── services                : general business logic services
+└── ml                          : python ML model for classifying plant species
 ```
 
 ## :gear: Developer Setup Guide
