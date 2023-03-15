@@ -111,8 +111,8 @@ app.get("/observations", async(req: Request, res: Response) => {
 app.get("/observations/id", async(req: Request, res: Response) => {
     try {
         const {observation_id} = req.body;
-        const user = await pool.query("SELECT * FROM observations WHERE observation_id = $1", [observation_id]);
-        res.json(user.rows[0]);
+        const observation = await pool.query("SELECT * FROM observations WHERE observation_id = $1", [observation_id]);
+        res.json(observation.rows[0]);
     } catch (error) {
         console.error(error);
     }
