@@ -16,9 +16,11 @@
         },
         "assetBundlePatterns": ["**/*"],
         "ios": {
-            "supportsTablet": true
+            "supportsTablet": true,
+            "bundleIdentifier": "com.app.floradora"
         },
         "android": {
+            "package": "com.app.floradora",
             "adaptiveIcon": {
                 "foregroundImage": "./assets/adaptive-icon.png",
                 "backgroundColor": "#FFFFFF"
@@ -26,6 +28,7 @@
         },
         "web": {
             "favicon": "./assets/favicon.png"
-        }
+        },
+        "scheme": "com.app.floradora"
     }
 }
