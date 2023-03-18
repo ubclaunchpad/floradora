@@ -12,7 +12,7 @@ export default function App() {
         requestPermission();
     }
 
-    function toggleCameraType() {
+    function toggleCameraType() { // todo: fix toggle button
         setType((current) => (current === CameraType.back ? CameraType.front : CameraType.back));
     }
 
