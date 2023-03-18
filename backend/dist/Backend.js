@@ -105,8 +105,8 @@ app.get("/observations", (req, res) => __awaiter(void 0, void 0, void 0, functio
 app.get("/observations/id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { observation_id } = req.body;
-        const user = yield db_1.default.query("SELECT * FROM observations WHERE observation_id = $1", [observation_id]);
-        res.json(user.rows[0]);
+        const observation = yield db_1.default.query("SELECT * FROM observations WHERE observation_id = $1", [observation_id]);
+        res.json(observation.rows[0]);
     }
     catch (error) {
         console.error(error);
