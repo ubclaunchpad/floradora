@@ -4,6 +4,11 @@ import { Server } from 'http';
 import pool from './db';
 const app = express();
 
+//testing isalive
+app.get('/isalive', (req: Request, res: Response) => {
+    res.send("I'm alive!");
+});
+
 // middleware
 app.use(cors());
 app.use(express.json()); //req body
