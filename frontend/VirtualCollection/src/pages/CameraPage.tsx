@@ -6,7 +6,7 @@ import { Button, Image, StyleSheet, Text, View, SafeAreaView } from 'react-nativ
 
 export default function App() {
     //init and set permission variables
-    let cameraRef = useRef();
+    let cameraRef = useRef<Camera>(null);
     const [hasCameraPermission, setHasCameraPermission] = useState(false);              // inits as false to be reset later on as true
     const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState(false);  // won't work without being set w false first
     const [permission, requestPermission] = Camera.useCameraPermissions();              // from the beforetimes
