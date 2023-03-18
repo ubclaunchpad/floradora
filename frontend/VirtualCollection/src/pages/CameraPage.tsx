@@ -50,7 +50,7 @@ export default function App() {
             exif: false
     };
                             //cameraRef no longer complains after typecasting
-        let newPhoto = await (cameraRef.current as Camera).takePictureAsync(options); // TODO: complains but not sure how to fix. nothing works
+        let newPhoto = await (cameraRef.current as Camera).takePictureAsync(options); 
         setPhoto(newPhoto);
     }
 };
@@ -73,7 +73,7 @@ export default function App() {
     }
 
     return (
-        <Camera style = {styles.container} ref={cameraRef}> // not sure what's wrong here. should work
+        <Camera style = {styles.container} ref={cameraRef}> 
             <View style={styles.buttonContainer}>
                 <Button title = "Snap a Picture" onPress={takePic} /> 
                 <Button title = "Flip" onPress={toggleCameraType} /> 
