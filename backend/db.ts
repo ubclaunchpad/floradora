@@ -1,6 +1,6 @@
-import PG from "pg";
-const Pool = PG.Pool;
 import * as dotenv from 'dotenv';
+import PG from 'pg';
+const Pool = PG.Pool;
 
 dotenv.config();
 
@@ -9,7 +9,7 @@ const pool = new Pool({
     password: process.env.PASSWORD,
     host: process.env.HOST,
     port: parseInt(process.env.PORT),
-    database: process.env.DATABASE
+    database: process.env.DATABASE,
 });
 
 export default pool;
