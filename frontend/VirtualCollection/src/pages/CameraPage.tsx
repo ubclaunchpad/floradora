@@ -1,45 +1,103 @@
 import { Camera, CameraType } from 'expo-camera';
-import React, { useRef, useState } from 'react';
-import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import React, { useRef, useState, useEffect } from 'react';
+import * as MediaLibrary from 'expo-media-library';
+import { Button, Image, StyleSheet, Text, View, SafeAreaView } from 'react-native';
 
 export default function App() {
-    const [type, setType] = useState(CameraType.back);
-    const [permission, requestPermission] = Camera.useCameraPermissions();
-    const [uri, setUri] = useState('');
-    const camera = useRef<Camera>(null);
+    //init and set permission variables
+    let cameraRef = useRef();
+    const [hasCameraPermission, setHasCameraPermission] = useState(false);              // inits as false to be reset later on as true
+    const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState(false);  // won't work without being set w false first
+    const [permission, requestPermission] = Camera.useCameraPermissions();              // from the beforetimes
+    type Photo = { uri: string };  // exists to stop photo from complaining
+    const [photo, setPhoto] = useState<Photo | undefined>(); // tried to do useState() but would not work???
+    const [type, setType] = useState(CameraType.back); // to change to back cam
+    
+    //ask permission before starting
+    useEffect(() => {
+        (async () => {
+            const cameraPermission = await Camera.requestCameraPermissionsAsync();
+            const mediaLibraryPermission = await MediaLibrary.requestPermissionsAsync();
+            setHasCameraPermission(cameraPermission.status == "granted");
+            setHasMediaLibraryPermission(mediaLibraryPermission.status === "granted");
+        })();
+    }, []);
+    
+    // prompt enabling permission
+    if (hasCameraPermission === false || hasCameraPermission === undefined){
+        return <Text>Requesting permissions...</Text>
+    } else if (!hasCameraPermission){
+        //return <Text> Permission for camera not granted. Please change this in settings.</Text>
+        requestPermission(); // requests permissions
+    } 
+    
+    // back camera functionality (todo?)
+    // const [type, setType] = useState(CameraType.back);
+    // const [uri, setUri] = useState('');
+    // const camera = useRef<Camera>(null); ignore this jungle
 
-    if (!permission || !permission.granted) {
-        requestPermission();
-    }
-
-    function toggleCameraType() { // todo: fix toggle button
+    function toggleCameraType() {
         setType((current) => (current === CameraType.back ? CameraType.front : CameraType.back));
     }
 
-    function snap() {
-        camera.current?.takePictureAsync().then((photo) => {
-            setUri(photo.uri);
-        });
+    // Camera UI
+    let takePic = async () => {
+        if (cameraRef.current){
+        let options = {
+            quality: 1,
+            base64: true,
+            exif: false
+    };
+                            //cameraRef no longer complains after typecasting
+        let newPhoto = await (cameraRef.current as Camera).takePictureAsync(options); // TODO: complains but not sure how to fix. nothing works
+        setPhoto(newPhoto);
+    }
+};
+
+    // save and view photo 
+    if (photo){
+        let savePhoto = () => { //can save photo
+            MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
+                setPhoto(undefined); //discards photo after saved
+            });
+        };
+     
+        return (
+            <SafeAreaView style={styles.container}>
+                <Image style={styles.preview} source={{ uri: "data:image/jpg" + photo }} />
+                {hasMediaLibraryPermission ? <Button title="Save" onPress={savePhoto} /> : undefined }
+                <Button title="Discard" onPress={() => setPhoto(undefined)} /> 
+            </SafeAreaView>
+        )
     }
 
-    if (uri.length == 0) {
-        return (
-            <View style={{ display: 'flex' }}>
-                <Camera style={{ height: '100%' }} type={type} ref={camera}>
-                    <View>
-                        <TouchableOpacity onPress={toggleCameraType}>
-                            <Button title="Snap pic" onPress={snap} />
-                            <Text>Flip Camera </Text>
-                        </TouchableOpacity>
-                    </View>
-                </Camera>
-            </View>
-        );
-    } else {
-        return (
-            <View style={{ display: 'flex' }}>
-                <Image style={{ width: '100%', height: '100%' }} source={{ uri: uri }} />
-            </View>
-        );
-    }
+    return (
+        <Camera style = {styles.container} ref={cameraRef}> // not sure what's wrong here. should work
+            <View style={styles.buttonContainer}>
+                <Button title = "Snap a Picture" onPress={takePic} /> 
+                <Button title = "Flip" onPress={toggleCameraType} /> 
+            </View> 
+            <StatusBar style="auto" />
+        </Camera>
+    );
 }
+
+  // style guideline
+  const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    buttonContainer: {
+        backgroundColor: '#ffff',
+        alignSelf: 'flex-end'
+    },
+
+    preview: {
+        alignSelf: 'stretch',
+        flex: 1
+    }
+});
