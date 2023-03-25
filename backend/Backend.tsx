@@ -1,31 +1,31 @@
+import bodyParser from 'body-parser';
 import cors from 'cors';
 import express, { Request, Response } from 'express';
 import { Server } from 'http';
 import pool from './db';
-import bodyParser from 'body-parser';
 
 const app = express();
 const port = 8080;
 
-app.use(express.json())
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false}))
+app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const user_data = {
-    "display_name": "Jane Doe",
-    "email": "jdoe@gmail.com",
-}
-const plant_data =  {
-    "plant_id": 0,
-    "type": {
-        "id": 0,
-        "name": "Sunflower"
+    display_name: 'Jane Doe',
+    email: 'jdoe@gmail.com',
+};
+const plant_data = {
+    plant_id: 0,
+    type: {
+        id: 0,
+        name: 'Sunflower',
     },
-    "latitude": "10.456",
-    "longitude": "12.789",
-    "image": "(base 64 encoded image)",
-    "confidence_score" : "0.6"
-}
+    latitude: '10.456',
+    longitude: '12.789',
+    image: '(base 64 encoded image)',
+    confidence_score: '0.6',
+};
 
 // TODO: integrate db
 // TODO: incorporate express-validator
