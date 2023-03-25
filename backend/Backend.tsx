@@ -41,11 +41,11 @@ app.post('/v0/users', (req: Request, res: Response) => {
 });
 
 app.put('/v0/users', (req: Request, res: Response) => {
-    res.status(200);
+    res.sendStatus(200);
 });
 
 app.delete('/v0/users', (req: Request, res: Response) => {
-    res.status(200);
+    res.sendStatus(200);
 });
 
 // v0/collected_plants
@@ -59,11 +59,11 @@ app.post('/v0/collected_plants', (req: Request, res: Response) => {
 });
 
 app.put('/v0/collected_plants', (req: Request, res: Response) => {
-    res.status(200);
+    res.sendStatus(200);
 });
 
 app.delete('/v0/collected_plants', (req: Request, res: Response) => {
-    res.status(200);
+    res.sendStatus(200);
 });
 
 // middleware
@@ -72,7 +72,7 @@ app.use(express.json()); //req body
 
 // local listener
 const server: Server = app.listen(port, () => {
-    console.log('Server is listning on port 8080');
+    console.log('Server is listening on port 8080');
 });
 export default server;
 
