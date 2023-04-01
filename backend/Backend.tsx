@@ -1,12 +1,69 @@
+import bodyParser from 'body-parser';
 import cors from 'cors';
 import express, { Request, Response } from 'express';
 import { Server } from 'http';
 import pool from './db';
-const app = express();
 
-//testing isalive
-app.get('/isalive', (req: Request, res: Response) => {
-    res.send("I'm alive!");
+const app = express();
+const port = 8080;
+
+app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+const user_data = {
+    display_name: 'Jane Doe',
+    email: 'jdoe@gmail.com',
+};
+const plant_data = {
+    plant_id: 0,
+    type: {
+        id: 0,
+        name: 'Sunflower',
+    },
+    latitude: '10.456',
+    longitude: '12.789',
+    image: '(base 64 encoded image)',
+    confidence_score: '0.6',
+};
+
+// TODO: integrate db
+// TODO: incorporate express-validator
+
+// v0/users
+app.get('/v0/users', (req: Request, res: Response) => {
+    res.status(200).json(user_data);
+});
+
+app.post('/v0/users', (req: Request, res: Response) => {
+    const user_body = req.body;
+    res.send('Data Received:' + JSON.stringify(user_body));
+});
+
+app.put('/v0/users', (req: Request, res: Response) => {
+    res.sendStatus(200);
+});
+
+app.delete('/v0/users', (req: Request, res: Response) => {
+    res.sendStatus(200);
+});
+
+// v0/collected_plants
+app.get('/v0/collected_plants', (req: Request, res: Response) => {
+    res.status(200).json(plant_data);
+});
+
+app.post('/v0/collected_plants', (req: Request, res: Response) => {
+    const plant_body = req.body;
+    res.send('Data Received:' + JSON.stringify(plant_body));
+});
+
+app.put('/v0/collected_plants', (req: Request, res: Response) => {
+    res.sendStatus(200);
+});
+
+app.delete('/v0/collected_plants', (req: Request, res: Response) => {
+    res.sendStatus(200);
 });
 
 // middleware
@@ -14,14 +71,14 @@ app.use(cors());
 app.use(express.json()); //req body
 
 // local listener
-const server: Server = app.listen(8080, () => {
-    console.log('Server is listning on port 8080');
+const server: Server = app.listen(port, () => {
+    console.log('Server is listening on port 8080');
 });
 export default server;
 
-//ROUTES//
+// ROUTES//
 
-//create a user
+// create a user
 
 app.post('/users', async (req: Request, res: Response) => {
     try {
@@ -37,7 +94,7 @@ app.post('/users', async (req: Request, res: Response) => {
     }
 });
 
-//get all users
+// get all users
 
 app.get('/users', async (req: Request, res: Response) => {
     try {
@@ -48,7 +105,7 @@ app.get('/users', async (req: Request, res: Response) => {
     }
 });
 
-//get a user
+// get a user
 
 app.get('/users/id', async (req: Request, res: Response) => {
     try {
@@ -76,7 +133,7 @@ app.put('/users/id', async (req: Request, res: Response) => {
     }
 });
 
-//delete a user
+// delete a user
 
 app.delete('/users', async (req: Request, res: Response) => {
     try {
@@ -88,7 +145,7 @@ app.delete('/users', async (req: Request, res: Response) => {
     }
 });
 
-//create an observation
+// create an observation
 
 app.post('/observations', async (req: Request, res: Response) => {
     try {
@@ -123,7 +180,7 @@ app.post('/observations', async (req: Request, res: Response) => {
     }
 });
 
-//get all observations
+// get all observations
 
 app.get('/observations', async (req: Request, res: Response) => {
     try {
@@ -134,7 +191,7 @@ app.get('/observations', async (req: Request, res: Response) => {
     }
 });
 
-//get an observation
+// get an observation
 
 app.get('/observations/id', async (req: Request, res: Response) => {
     try {
