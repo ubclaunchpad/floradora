@@ -14,12 +14,12 @@
         "plugins": [
             [
                 "expo-media-library",
-            {
-                "photosPermission": "Allow $(PRODUCT_NAME) to access your  photos.",
-                "savePhotosPermission": "Allow $(Product_Name) to save photos.",
-                "isAccessMediaLocationEnabled": "true" 
-            }
-        ]
+                {
+                    "photosPermission": "Allow $(PRODUCT_NAME) to access your  photos.",
+                    "savePhotosPermission": "Allow $(Product_Name) to save photos.",
+                    "isAccessMediaLocationEnabled": "true"
+                }
+            ]
         ],
         "updates": {
             "fallbackToCacheTimeout": 0
