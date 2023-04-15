@@ -20,16 +20,18 @@
         "@types/react-dom": "^18.0.10",
         "expo": "~47.0.12",
         "expo-camera": "~13.1.0",
+        "expo-image-picker": "^14.1.1",
+        "expo-media-library": "~15.0.0",
         "expo-permissions": "^14.0.0",
         "expo-status-bar": "~1.4.2",
         "react": "^18.1.0",
         "react-dom": "^18.1.0",
         "react-native": "0.70.5",
         "react-native-camera": "^4.2.1",
+        "react-native-image-picker": "^5.3.1",
         "react-native-permissions": "^3.6.1",
         "react-native-reanimated": "^2.14.4",
-        "react-native-web": "~0.18.9",
-        "expo-media-library": "~15.0.0"
+        "react-native-web": "~0.18.9"
     },
     "devDependencies": {
         "@babel/core": "^7.12.9",
